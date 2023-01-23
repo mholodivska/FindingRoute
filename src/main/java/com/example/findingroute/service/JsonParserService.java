@@ -11,14 +11,17 @@ public class JsonParserService {
     public static List<Node> parse(String countriesJson) {
         List<Node> countries = new ArrayList<>();
         JSONArray countriesArray = new JSONArray(countriesJson);
+
         for (Object o : countriesArray) {
-            JSONObject next = (JSONObject) o;
-            String cca3 = (String) next.get("cca3");
-            JSONArray bordersJson = (JSONArray) next.get("borders");
-            List<String> bordersList = bordersJson.toList().stream()
-                    .map(object -> Objects.toString(object, null))
-                    .toList();
-            countries.add(new Node(cca3, bordersList));
+            if (o instanceof JSONObject next) {
+                if (next.has("cca3") && next.get("cca3") instanceof String cca3 &&
+                next.has("borders") && next.get("borders") instanceof JSONArray bordersJson) {
+                    List<String> bordersList = bordersJson.toList().stream()
+                            .map(object -> Objects.toString(object, null))
+                            .toList();
+                    countries.add(new Node(cca3, bordersList));
+                }
+            }
         }
 
         return countries;
