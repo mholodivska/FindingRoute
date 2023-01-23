@@ -7,14 +7,14 @@ import java.util.List;
 
 @Data
 public class Node {
-    private String name;
+    private String nameCode;
     private List<String> neighboursStrings;
     private List<Node> neighbours;
     private boolean visited = false;
     private Node prev = null;
 
-    public Node(String name, List<String> neighboursStrings){
-        this.name = name;
+    public Node(String nameCode, List<String> neighboursStrings){
+        this.nameCode = nameCode;
         this.neighboursStrings = neighboursStrings;
         this.neighbours = new ArrayList<>();
     }
@@ -24,6 +24,6 @@ public class Node {
     }
 
     public String toString(){
-        return this.name;
+        return this.nameCode;
     }
 }

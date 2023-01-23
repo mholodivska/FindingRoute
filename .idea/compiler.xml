@@ -7,15 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="FindingRoute" />
         <module name="FindingRouteRepo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="FindingRoute" target="17" />
       <module name="FindingRouteRepo" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="FindingRoute" options="-parameters" />
       <module name="FindingRouteRepo" options="-parameters" />
     </option>
   </component>

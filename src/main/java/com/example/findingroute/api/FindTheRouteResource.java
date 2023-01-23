@@ -15,6 +15,17 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/routing")
 public class FindTheRouteResource {
 
+    /**
+     * Search for the possible land route from one country to another.
+     *
+     * @param origin
+     *              the country code - e.g. BEL, BEN, BFA, BGD, BGR, BHR, BHS
+     * @param destination
+     *              the country code - e.g. CHE, CHL, CHN, CIV, CMR, COD, COG
+     * @return string with the route if exists
+     * @throws ResponseStatusException with code 400
+     *             if some problem occurs
+     */
     @GetMapping("/{origin}/{destination}")
     public ResponseEntity<Object> findTheRouteFromOriginToDestination(@PathVariable String origin, @PathVariable String destination) {
         Node start = NodeService.findTheNode(origin);

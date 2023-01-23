@@ -35,8 +35,8 @@ public class NodeService {
 
     public static Node findTheNode(String countryName) {
         Node country = null;
-        if (countries.stream().anyMatch(countryNode -> countryNode.getName().equalsIgnoreCase(countryName))) {
-            country = countries.stream().filter(countryNode -> countryNode.getName().equalsIgnoreCase(countryName)).findFirst().get();
+        if (countries.stream().anyMatch(countryNode -> countryNode.getNameCode().equalsIgnoreCase(countryName))) {
+            country = countries.stream().filter(countryNode -> countryNode.getNameCode().equalsIgnoreCase(countryName)).findFirst().get();
         }
         return country;
     }
