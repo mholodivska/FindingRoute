@@ -30,8 +30,10 @@ public class SearchRouteResource {
      */
     @GetMapping("/{origin}/{destination}")
     public ResponseEntity<Object> findTheRouteFromOriginToDestination(@PathVariable String origin, @PathVariable String destination) {
-        Node start = NodeService.findNode(origin);
-        Node finish = NodeService.findNode(destination);
+        NodeService nodeService = NodeService.getInstance();
+        List<Node> copyCountries = nodeService.getCopyCountries();
+        Node start = nodeService.findNode(origin, copyCountries);
+        Node finish = nodeService.findNode(destination, copyCountries);
 
         if (start == null || finish == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

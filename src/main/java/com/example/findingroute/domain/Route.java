@@ -48,14 +48,7 @@ public class Route {
             node = node.getPrev();
         }
         Collections.reverse(route);
-        List<String> names = getArrayOfCountryNames(route);
-
-        for (Node nodeToClear : route) {
-            nodeToClear.setPrev(null);
-            nodeToClear.setVisited(false);
-        }
-
-        return names;
+        return getArrayOfCountryNames(route);
     }
 
     private List<String> getArrayOfCountryNames(List<Node> route) {

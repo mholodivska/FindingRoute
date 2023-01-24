@@ -1,17 +1,23 @@
 package com.example.findingroute.service;
 
 import com.example.findingroute.domain.Node;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
 public class NodeService {
-    private static List<Node> countries = new ArrayList<>();
+    private List<Node> countries;
+    private static NodeService nodeService;
 
-    public NodeService() {
+    private NodeService() {
         initCountries();
+    }
+
+    public static NodeService getInstance() {
+        if (nodeService == null) {
+            nodeService = new NodeService();
+        }
+        return nodeService;
     }
 
     private void initCountries() {
@@ -19,25 +25,40 @@ public class NodeService {
         if (countriesJson != null) {
             countries = JsonParserService.parse(countriesJson);
             for (Node country : countries) {
-                createNeighbours(country);
+                createNeighbours(country, countries);
             }
         }
     }
 
-    private void createNeighbours(Node country) {
+    private void createNeighbours(Node country, List<Node> countries) {
         for (String neighbourCode : country.getNeighboursStrings()) {
-            Node potentialNeighbour = findNode(neighbourCode);
+            Node potentialNeighbour = findNode(neighbourCode, countries);
             if (potentialNeighbour != null) {
                 country.addNeighbour(potentialNeighbour);
             }
         }
     }
 
-    public static Node findNode(String countryName) {
+    public Node findNodeFromCopy(String countryName) {
+        return findNode(countryName, getCopyCountries());
+    }
+
+    public Node findNode(String countryName, List<Node> countries) {
         Node country = null;
         if (countries.stream().anyMatch(countryNode -> countryNode.getNameCode().equalsIgnoreCase(countryName))) {
             country = countries.stream().filter(countryNode -> countryNode.getNameCode().equalsIgnoreCase(countryName)).findFirst().get();
         }
         return country;
+    }
+
+    public List<Node> getCopyCountries() {
+        List<Node> countriesCopy = new ArrayList<>();
+        for (Node node : countries) {
+            countriesCopy.add(new Node(node));
+        }
+        for (Node country : countriesCopy) {
+            createNeighbours(country, countriesCopy);
+        }
+        return countriesCopy;
     }
 }
