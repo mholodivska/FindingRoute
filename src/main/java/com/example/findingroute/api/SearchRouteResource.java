@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/routing")
-public class FindTheRouteResource {
+public class SearchRouteResource {
 
     /**
      * Search for the possible land route from one country to another.
@@ -28,14 +30,14 @@ public class FindTheRouteResource {
      */
     @GetMapping("/{origin}/{destination}")
     public ResponseEntity<Object> findTheRouteFromOriginToDestination(@PathVariable String origin, @PathVariable String destination) {
-        Node start = NodeService.findTheNode(origin);
-        Node finish = NodeService.findTheNode(destination);
+        Node start = NodeService.findNode(origin);
+        Node finish = NodeService.findNode(destination);
 
         if (start == null || finish == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
-        String resultRoute = new Route(start, finish).searchTheRoute();
+        List<String> resultRoute = new Route(start, finish).searchTheRoute();
 
         if (resultRoute == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

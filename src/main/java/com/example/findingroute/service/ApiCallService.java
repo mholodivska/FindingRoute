@@ -13,15 +13,15 @@ import java.util.stream.Collectors;
 @Service
 public class ApiCallService {
 
-    private static final String urlLink = "https://raw.githubusercontent.com/mledoze/countries/master/countries.json";
+    private static final String URL = "https://raw.githubusercontent.com/mledoze/countries/master/countries.json";
 
     public static String getCountriesJson() {
         String resultedCountriesJson = null;
         try {
-            URLConnection connection = new URL(urlLink).openConnection();
+            URLConnection connection = new URL(URL).openConnection();
             InputStream is = connection.getInputStream();
             resultedCountriesJson = new BufferedReader(new InputStreamReader(is))
-                    .lines().collect(Collectors.joining("\n"));
+                    .lines().collect(Collectors.joining(System.lineSeparator()));
 
         } catch (IOException ex){
             System.out.println(ex.getMessage());

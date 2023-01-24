@@ -10,8 +10,8 @@ public class Node {
     private String nameCode;
     private List<String> neighboursStrings;
     private List<Node> neighbours;
-    private boolean visited = false;
-    private Node prev = null;
+    private boolean visited;
+    private Node prev;
 
     public Node(String nameCode, List<String> neighboursStrings){
         this.nameCode = nameCode;

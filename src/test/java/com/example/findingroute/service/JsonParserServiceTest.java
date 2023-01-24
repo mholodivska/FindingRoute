@@ -14,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JsonParserServiceTest {
     String json = "";
-    String wrongJson = "[{\"name\": {\"common\": \"Aruba\",\"official\": \"Aruba\"}},{\"name\": {\"common\": \"Afghanistan\", \"official\": \"Islamic Republic of Afghanistan\"}}]";
+    String wrongJson = "[{\"name\": {\"common\": \"Aruba\",\"official\": \"Aruba\"}},{\"name\": {\"common\": " +
+            "\"Afghanistan\", \"official\": \"Islamic Republic of Afghanistan\"}}]";
 
     @BeforeEach
     public void init() {

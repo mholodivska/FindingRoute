@@ -14,7 +14,7 @@ public class Route {
         this.end = end;
     }
 
-    public String searchTheRoute() {
+    public List<String> searchTheRoute() {
         Queue<Node> queue = new LinkedList<>();
         start.setVisited(true);
         queue.add(start);
@@ -36,25 +36,33 @@ public class Route {
         return traceTheRoute();
     }
 
-    private String traceTheRoute() {
+    private List<String> traceTheRoute() {
         Node node = end;
-        List<Node> route = new ArrayList<>();
         if (node.getPrev() == null) {
             return null;
         }
+        List<Node> route = new ArrayList<>();
 
         while (node != null) {
             route.add(node);
             node = node.getPrev();
         }
         Collections.reverse(route);
-        String rezultRoute = route.toString();
+        List<String> names = getArrayOfCountryNames(route);
 
         for (Node nodeToClear : route) {
             nodeToClear.setPrev(null);
             nodeToClear.setVisited(false);
         }
 
-        return rezultRoute;
+        return names;
+    }
+
+    private List<String> getArrayOfCountryNames(List<Node> route) {
+        List<String> result = new ArrayList<>();
+        for (Node node1 : route) {
+            result.add(node1.getNameCode());
+        }
+        return result;
     }
 }

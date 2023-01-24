@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NodeServiceTest {
 
@@ -15,12 +14,12 @@ class NodeServiceTest {
     @Test
     void findTheNodeExisted() {
         Node nodeUkr = new Node("UKR", Arrays.asList("BLR", "HUN", "MDA", "POL", "ROU", "RUS", "SVK"));
-        Node ukrExists = NodeService.findTheNode("UKR");
+        Node ukrExists = NodeService.findNode("UKR");
         assertEquals(nodeUkr.getNeighboursStrings(), ukrExists.getNeighboursStrings());
     }
     @Test
     void findTheNodeNotExisted() {
-        Node dddNotExists = NodeService.findTheNode("DDDD");
+        Node dddNotExists = NodeService.findNode("DDDD");
         assertNull(dddNotExists);
     }
 }

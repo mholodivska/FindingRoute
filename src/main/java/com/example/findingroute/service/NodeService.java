@@ -26,14 +26,14 @@ public class NodeService {
 
     private void createNeighbours(Node country) {
         for (String neighbourCode : country.getNeighboursStrings()) {
-            Node potentialNeighbour = findTheNode(neighbourCode);
+            Node potentialNeighbour = findNode(neighbourCode);
             if (potentialNeighbour != null) {
                 country.addNeighbour(potentialNeighbour);
             }
         }
     }
 
-    public static Node findTheNode(String countryName) {
+    public static Node findNode(String countryName) {
         Node country = null;
         if (countries.stream().anyMatch(countryNode -> countryNode.getNameCode().equalsIgnoreCase(countryName))) {
             country = countries.stream().filter(countryNode -> countryNode.getNameCode().equalsIgnoreCase(countryName)).findFirst().get();
